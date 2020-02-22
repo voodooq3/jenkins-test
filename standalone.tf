@@ -13,6 +13,7 @@ data "aws_ami" "centos" {
   owners = ["679593333241"]
 }
 #------- Instance -------#
+#
 resource "aws_instance" "standalone" {
   count = 1
   ami           = "${data.aws_ami.centos.id}"
