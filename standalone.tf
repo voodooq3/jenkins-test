@@ -32,7 +32,7 @@ data "aws_ami" "centos" {
 #------- Instance -------#
 resource "aws_instance" "standalone" {
   count = 1
-  ami           = "${data.aws_ami.centos.id}"
+  ami           = "ami-04cf43aca3e6f3de3"
   instance_type = "t2.micro"
   key_name      = "voodoo.key"
  
