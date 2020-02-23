@@ -8,9 +8,6 @@ provider "aws" {
 provider "null" {
 
 }
-#
-#
-
 
 
 
