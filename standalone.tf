@@ -3,6 +3,14 @@ provider "aws" {
   version = "~> 2.0"
 }
 
+terraform {
+  backend "s3" {
+    bucket = "voodoo.terraform.state"
+    key    = "terraform tfstate"
+    region = "eu-central-1"
+  }
+}
+
 #--- data ---#
 data "aws_ami" "centos" {
   most_recent = true
