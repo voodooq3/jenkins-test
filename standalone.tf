@@ -6,7 +6,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "voodoo.terraform.state"
-    key    = "terraform tfstate"
+    key    = "terraform-job/terraform tfstate"
     region = "eu-central-1"
   }
 }
@@ -76,9 +76,5 @@ resource "aws_security_group" "StandaloneGroup" {
 }
 
 
-# output "instance_ips" {
-#   description = "The public IP address of the main server instance."
-#   value = ["${aws_instance.standalone.*.public_ip}"]
-# }
 
 
