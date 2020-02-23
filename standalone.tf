@@ -3,36 +3,37 @@ provider "aws" {
   version = "~> 2.0"
 }
 
-# #--- data ---#
-# data "aws_ami" "centos" {
-#   most_recent = true
+#--- data ---#
+data "aws_ami" "centos" {
+  most_recent = true
 
-#   filter {
-#     name   = "name"
-#     values = ["CentOS Linux 7 x86_64 HVM EBS *"]
-#   }
-#   filter {
-#     name   = "virtualization-type"
-#     values = ["hvm"]
-#   }
-#   owners = ["679593333241"]
-# }
-# #------- Instance -------#
-# #
-# resource "aws_instance" "standalone" {
-#   count = 1
-#   ami           = "${data.aws_ami.centos.id}"
-#   instance_type = "t2.micro"
-#   key_name      = "voodoo.key"
+  filter {
+    name   = "name"
+    values = ["CentOS Linux 7 x86_64 HVM EBS *"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+  owners = ["679593333241"]
+}
+#------- Instance -------#
+#
+resource "aws_instance" "standalone" {
+  count = 1
+  ami           = "${data.aws_ami.centos.id}"
+  instance_type = "t2.micro"
+  key_name      = "voodoo.key"
  
-#   root_block_device {
-#     delete_on_termination = true
-#   }
-#    vpc_security_group_ids = ["${aws_security_group.StandaloneGroup.id}"]
-#   tags = {
-#     Name    = "Standalone"
-#     Project = "standalone"
-#   }
+  root_block_device {
+    delete_on_termination = true
+  }
+   vpc_security_group_ids = ["${aws_security_group.StandaloneGroup.id}"]
+  tags = {
+    Name    = "Standalone"
+    Project = "standalone"
+  }
+}
 
 #--- security_group ---#
 resource "aws_security_group" "StandaloneGroup" {
@@ -65,7 +66,6 @@ resource "aws_security_group" "StandaloneGroup" {
     Name = "Standalone Group"
   }
 }
-
 
 
 # output "instance_ips" {
