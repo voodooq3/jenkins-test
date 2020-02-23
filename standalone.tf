@@ -1,8 +1,11 @@
+######### Let's Roll #########
+#--- aws ---#
 provider "aws" {
   region                  = "eu-central-1"
   version = "~> 2.0"
 }
 
+#--- s3 ---#
 terraform {
   backend "s3" {
     bucket = "voodoo.terraform.state"
@@ -25,8 +28,8 @@ data "aws_ami" "centos" {
   }
   owners = ["679593333241"]
 }
+
 #------- Instance -------#
-#
 resource "aws_instance" "standalone" {
   count = 1
   ami           = "${data.aws_ami.centos.id}"
@@ -74,7 +77,6 @@ resource "aws_security_group" "StandaloneGroup" {
     Name = "Standalone Group"
   }
 }
-
-
-
-
+# #▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼#
+# ######################## The End ########################
+# #▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲#
