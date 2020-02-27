@@ -26,13 +26,13 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
-        // stage('Push image')  {
-        //     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-        //         app.push("${env.BUILD_NUMBER}")
-        //         app.push("latest")
-        //     } 
-        //         echo "Push Docker Build to DockerHub"
-        // }
+        stage('Push image')  {
+            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+                app.push("${env.BUILD_NUMBER}")
+                app.push("latest")
+            } 
+                echo "Push Docker Build to DockerHub"
+        }
     }
 }
 
