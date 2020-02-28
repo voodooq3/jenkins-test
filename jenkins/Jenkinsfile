@@ -6,12 +6,12 @@ pipeline {
         }
     }
     stages {
-        stage('*************************** Build ***************************') {
+        stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('*************************** Test ***************************') {
+        stage('Test') {
             steps {
                 sh 'mvn test'
             }
@@ -21,25 +21,9 @@ pipeline {
                 }
             }
         }
-        stage('*************************** Deliver ***************************') {
+        stage('Deliver') {
             steps {
-                // echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-                sh 'chmod 777 ./jenkins/scripts/deliver.sh'
-                // sh 'ls -l ./jenkins/scripts/deliver.sh'
                 sh './jenkins/scripts/deliver.sh'
-            }
-        }
-        stage('*************************** Build ***************************') {
-            steps {
-
-                sh 'echo start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-
-            }
-        stage('*************************** Push ***************************') {
-            steps {
-
-                sh 'echo start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-
             }
         }
     }
