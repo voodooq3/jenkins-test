@@ -21,26 +21,26 @@ pipeline {
                 }
             }
         }
-        stage('*************************** Deliver ***************************') {
-            steps {
-                // echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-                sh 'chmod 777 ./jenkins/scripts/deliver.sh'
-                // sh 'ls -l ./jenkins/scripts/deliver.sh'
-                sh './jenkins/scripts/deliver.sh'
-            }
-        }
-        stage('*************************** Build ***************************') {
-            steps {
+        // stage('*************************** Deliver ***************************') {
+        //     steps {
+        //         // echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        //         sh 'chmod 777 ./jenkins/scripts/deliver.sh'
+        //         // sh 'ls -l ./jenkins/scripts/deliver.sh'
+        //         sh './jenkins/scripts/deliver.sh'
+        //     }
+        // }
+        // stage('*************************** Build ***************************') {
+        //     steps {
 
-                sh 'echo start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+        //         sh 'echo start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
 
-            }
-        stage('*************************** Push ***************************') {
-            steps {
+        //     }
+        // stage('*************************** Push ***************************') {
+        //     steps {
 
-                sh 'echo start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+        //         sh 'echo start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
 
-            }
+        //     }
         }
     }
 }
