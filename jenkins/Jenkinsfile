@@ -28,12 +28,12 @@ pipeline {
             }
         }
 
-        stage('____________________________Build____________________________') {
-            steps {
+        // stage('____________________________Build____________________________') {
+        //     steps {
 
-                 app = docker.build("voodooq3/maven")
+        //          app = docker.build("voodooq3/maven")
 
-            }
+        //     }
         }
     }
 }
