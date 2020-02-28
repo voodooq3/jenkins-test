@@ -23,9 +23,10 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh 'ls -l ./jenkins/scripts/deliver.sh'
                 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-                // sh './jenkins/scripts/deliver.sh'
+                sh 'chmod 777 ./jenkins/scripts/deliver.sh'
+                sh 'ls -l ./jenkins/scripts/deliver.sh'
+                sh './jenkins/scripts/deliver.sh'
             }
         }
     }
