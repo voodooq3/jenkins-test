@@ -6,12 +6,12 @@ pipeline {
         }
     }
     stages {
-        stage('Build') {
+        stage('_____________________________Build_____________________________') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('Test') {
+        stage('_____________________________Test_____________________________') {
             steps {
                 sh 'mvn test'
             }
@@ -21,9 +21,18 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
+        stage('_____________________________Deliver_____________________________') {
             steps {
+                sh 'chmod 777 ./jenkins/scripts/deliver.sh'
                 sh './jenkins/scripts/deliver.sh'
+            }
+        }
+
+        stage('____________________________Push____________________________') {
+            steps {
+
+                sh 'echo start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+
             }
         }
     }
