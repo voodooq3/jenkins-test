@@ -23,8 +23,8 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh 'pwd'
-                echo "./jenkins/scripts/deliver.sh"
+                sh 'ls -l ./jenkins/scripts/deliver.sh'
+                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
                 // sh './jenkins/scripts/deliver.sh'
             }
         }
