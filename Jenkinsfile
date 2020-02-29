@@ -2,6 +2,7 @@
 def appName = "my-app"
 def appVersion = "1.0-SNAPSHOT"
 
+/* ========================================================================= */
 node('slavevd'){
     tool name: 'maven', type: 'maven'
 
@@ -11,7 +12,7 @@ node('slavevd'){
             sh 'mvn -v'
         }
     }
-/* ========================================================================= */
+
     stage('***************** Get sources *****************'){
         git(url: 'git@github.com:jenkins-docs/simple-java-maven-app.git', branch: "master", credentialsId: 'git')
     }
@@ -28,16 +29,17 @@ node('slavevd'){
         }        
     }
 }
-// /* ========================================================================= */
-// node('***************** dockerAgent1 *****************'){
-//     tool name: 'docker-latest', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
-//     stage('Ckeck prerequest'){
-//         echo "${tool name: 'docker-latest'}"
-//         sh "ls -lah"
-//         withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){
-//             sh 'docker -v'
-//         } 
-//     }
+/* ========================================================================= */
+node('***************** docker Agent *****************'){
+    tool name: 'docker-latest', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+
+    stage('***************** Ckeck prerequest *****************'){
+        echo "${tool name: 'docker-latest'}"
+        sh "ls -lah"
+        withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){
+            sh 'docker -v'
+        } 
+    }
 
 //     stage('***************** Get Dockerfile *****************'){
 //         git(url: 'git@github.com:zulus911/lecture23.git', branch: "master", credentialsId: 'git')
