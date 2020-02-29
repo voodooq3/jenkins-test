@@ -8,27 +8,26 @@ node('slavevd'){
     stage('***************** Check prerequests *****************'){
         withEnv(["PATH=${env.PATH}:${tool 'maven'}/bin"]){
             sh 'env | grep PATH'
-
             sh 'mvn -v'
         }
     }
-// /* ========================================================================= */
-//     stage('***************** Get sources *****************'){
-//         git(url: 'git@github.com:jenkins-docs/simple-java-maven-app.git', branch: "master", credentialsId: 'git')
-//     }
+/* ========================================================================= */
+    stage('***************** Get sources *****************'){
+        git(url: 'git@github.com:jenkins-docs/simple-java-maven-app.git', branch: "master", credentialsId: 'git')
+    }
 
-//     stage('***************** Build *****************'){
-//         withEnv(["PATH=${env.PATH}:${tool 'maven'}/bin"]){
-//             sh 'mvn -B -DskipTests clean package'
-//         }        
-//     }
-//     stage('***************** Test *****************'){
-//         withEnv(["PATH=${env.PATH}:${tool 'maven'}/bin"]){
-//             sh 'mvn test'
-//             stash includes: 'target/my-app-1.0-SNAPSHOT.jar', name: 'artifactStash'
-//         }        
-//     }
-// }
+    stage('***************** Build *****************'){
+        withEnv(["PATH=${env.PATH}:${tool 'maven'}/bin"]){
+            sh 'mvn -B -DskipTests clean package'
+        }        
+    }
+    stage('***************** Test *****************'){
+        withEnv(["PATH=${env.PATH}:${tool 'maven'}/bin"]){
+            sh 'mvn test'
+            stash includes: 'target/my-app-1.0-SNAPSHOT.jar', name: 'artifactStash'
+        }        
+    }
+}
 // /* ========================================================================= */
 // node('***************** dockerAgent1 *****************'){
 //     tool name: 'docker-latest', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
