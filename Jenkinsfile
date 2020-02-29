@@ -47,6 +47,7 @@ node('slavevd'){
 
     stage('***************** Unstash application *****************'){
         unstash 'artifactStash'
+        sh 'ls -l'
     }
 
     stage('***************** Buiuld our Docker *****************'){
@@ -57,6 +58,6 @@ node('slavevd'){
 
  }
 
-
+step([$class: 'CordellWalkerRecorder']): Activate Chuck
 
 
