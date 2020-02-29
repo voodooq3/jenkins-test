@@ -30,7 +30,7 @@ node('slavevd'){
     }
 }
 /* ========================================================================= */
-node('***************** docker Agent *****************'){
+node('slavevd'){
     tool name: 'docker-latest', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
 
     stage('***************** Ckeck prerequest *****************'){
@@ -55,7 +55,7 @@ node('***************** docker Agent *****************'){
 //         }
 //     }
 
-//  }
+ }
 
 
 
