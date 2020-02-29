@@ -2,7 +2,7 @@
 def appName = "my-app"
 def appVersion = "1.0-SNAPSHOT"
 
-node('dockerAgent'){
+node('slavevd'){
     tool name: 'maven', type: 'maven'
 
     stage('***************** Check prerequests *****************'){
