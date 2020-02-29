@@ -1,3 +1,4 @@
+
 FROM openjdk
 
 ARG APP_NAME=''
