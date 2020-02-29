@@ -1,17 +1,17 @@
 
-// def appName = "my-app"
-// def appVersion = "1.0-SNAPSHOT"
+def appName = "my-app"
+def appVersion = "1.0-SNAPSHOT"
 
-// node('dockerAgent'){
-//     tool name: 'maven', type: 'maven'
+node('dockerAgent'){
+    tool name: 'maven', type: 'maven'
 
-//     stage('Check prerequests'){
-//         withEnv(["PATH=${env.PATH}:${tool 'maven'}/bin"]){
-//             sh 'env | grep PATH'
+    stage('***************** Check prerequests *****************'){
+        withEnv(["PATH=${env.PATH}:${tool 'maven'}/bin"]){
+            sh 'env | grep PATH'
 
-//             sh 'mvn -v'
-//         }
-//     }
+            sh 'mvn -v'
+        }
+    }
 // /* ========================================================================= */
 //     stage('***************** Get sources *****************'){
 //         git(url: 'git@github.com:jenkins-docs/simple-java-maven-app.git', branch: "master", credentialsId: 'git')
