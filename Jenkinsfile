@@ -58,6 +58,6 @@ node('slavevd'){
 
  }
 
-step([$class: 'CordellWalkerRecorder']): Activate Chuck
+step([$class: 'CordellWalkerRecorder'])
 
 
