@@ -70,7 +70,7 @@ node('slavevdjnlp'){
                 cont.push()
                 cont.push('latest')
             }
-             sh "docker push ${imageName}"
+            // sh "docker push ${imageName}"
              sh "docker rmi ${imageName}"
         }
     }
