@@ -61,7 +61,7 @@ node('slavevdjnlp'){
         withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){   
             // sh "echo $DOCKERHUB_USER"
             withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DockerHubUser', passwordVariable: 'DockerHubPass')]) {
-                sh "docker login -u $DockerHubUser -p $DockerHubPass docker.domain.com"
+                sh "docker login -u $DockerHubUser -p $DockerHubPass"
                 sh "docker push voodooq3/mavendocker"
             }
 
