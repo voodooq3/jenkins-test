@@ -62,16 +62,16 @@ node('slavevdjnlp'){
 
     stage('***************** Push container *****************'){
         withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){   
-            // withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DockerHubUser', passwordVariable: 'DockerHubPass')]) {
-            //     sh "docker login -u $DockerHubUser -p $DockerHubPass"
-            //  }
+            withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DockerHubUser', passwordVariable: 'DockerHubPass')]) {
+                sh "docker login -u $DockerHubUser -p $DockerHubPass"
+             }
             // withDockerRegistry(registry: [credentialsId: 'DockerHubCred']) {
-             withDockerRegistry(credentialsId: 'DockerHubCred', url: '') {
-                sh "docker push ${imageName}"
+             // withDockerRegistry(credentialsId: 'DockerHubCred', url: '') {
+                // sh "docker push ${imageName}"
                 // push('voodooq3/mavendocker')
                 // cont.push('latest')
             }
-            // sh "docker push ${imageName}"
+            /sh "docker push ${imageName}"
              sh "docker rmi ${imageName}"
         }
     }
