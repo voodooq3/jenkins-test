@@ -1,6 +1,7 @@
 
 def appName = "my-app"
 def appVersion = "1.0-SNAPSHOT"
+def imageName = "voodooq3/mavendocker"
 
 /* ========================================================================= */
 node('slavevd'){
@@ -29,6 +30,7 @@ node('slavevd'){
         }        
     }
 }
+
 /* ========================================================================= */
 node('slavevdjnlp'){
     tool name: 'docker-latest', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
@@ -52,34 +54,19 @@ node('slavevdjnlp'){
 
     stage('***************** Buiuld container *****************'){
         withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){        
-            sh "docker build --no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} -t voodooq3/mavendocker ."
+            sh "docker build --no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} -t ${imageName} ."
             sh "docker ps -a"
         }
     }
 
     stage('***************** Push container *****************'){
         withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){   
-            // sh "echo $DOCKERHUB_USER"
             withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DockerHubUser', passwordVariable: 'DockerHubPass')]) {
                 sh "docker login -u $DockerHubUser -p $DockerHubPass"
-                sh "docker push voodooq3/mavendocker"
-            }
-
-            // sh "docker login -u "$DOCKERHUB_USER" -p "$DOCKERHUB_PASS" docker.domain.com"
-            // sh "docker push voodooq3/mavendocker"
-            // sh "docker rmi voodooq3/mavendocker" 
+             }
+             sh "docker push ${imageName}"
         }
     }
-
-
-    // stage('***************** PRINT OUT *****************'){    
-    //     withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DockerHubUser', passwordVariable: 'DockerHubPass')]) {
-    //         sh "echo $dockerhubusername >> 1.txt"
-    //         sh "cat 1.txt"
-    //     }
-    // }
-
-
  }
 
 /* ========================================================================= */
