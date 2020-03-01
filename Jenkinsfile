@@ -69,7 +69,8 @@ node('slavevdjnlp'){
 
     stage('***************** PRINT OUT *****************'){    
         withCredentials([usernamePassword(credentialsId: 'dockerhubcred', usernameVariable: 'username', passwordVariable: 'password')]) {
-            sh "echo $username"
+            sh "echo $username >> 1.txt"
+            sh "cat 1.txt"
         }
     }
 
