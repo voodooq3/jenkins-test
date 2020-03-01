@@ -2,8 +2,6 @@
 def appName = "my-app"
 def appVersion = "1.0-SNAPSHOT"
 
-import jenkins.model.*
-
 /* ========================================================================= */
 node('slavevd'){
     tool name: 'maven', type: 'maven'
@@ -61,10 +59,3 @@ node('slavevdjnlp'){
  }
 
 /* ========================================================================= */
-
-
-for(item in Jenkins.instance.items) {
-    println("job $item.name")
-      if (item.hasProperty('publishersList'))
-        item.publishersList.replace(new  hudson.plugins.chucknorris.CordellWalkerRecorder());
-}
