@@ -66,6 +66,7 @@ node('slavevdjnlp'){
                 sh "docker login -u $DockerHubUser -p $DockerHubPass"
              }
              sh "docker push ${imageName}"
+             sh "docker rmi ${imageName}"
         }
     }
  }
