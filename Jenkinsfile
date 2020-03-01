@@ -60,6 +60,11 @@ node('slavevdjnlp'){
     stage('***************** Push container *****************'){
         withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){   
             // sh "echo $DOCKERHUB_USER"
+            withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DockerHubUser', passwordVariable: 'DockerHubPass')]) {
+                sh "docker login -u $DockerHubUser -p $DockerHubPass docker.domain.com"
+                sh "docker push voodooq3/mavendocker"
+            }
+
             // sh "docker login -u "$DOCKERHUB_USER" -p "$DOCKERHUB_PASS" docker.domain.com"
             // sh "docker push voodooq3/mavendocker"
             // sh "docker rmi voodooq3/mavendocker" 
@@ -67,12 +72,12 @@ node('slavevdjnlp'){
     }
 
 
-    stage('***************** PRINT OUT *****************'){    
-        withCredentials([usernamePassword(credentialsId: 'dockerhubcred', usernameVariable: 'username', passwordVariable: 'password')]) {
-            sh "echo $username >> 1.txt"
-            sh "cat 1.txt"
-        }
-    }
+    // stage('***************** PRINT OUT *****************'){    
+    //     withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DockerHubUser', passwordVariable: 'DockerHubPass')]) {
+    //         sh "echo $dockerhubusername >> 1.txt"
+    //         sh "cat 1.txt"
+    //     }
+    // }
 
 
  }
