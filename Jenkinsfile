@@ -52,7 +52,7 @@ node('slavevdjnlp'){
 
     stage('***************** Buiuld our Docker *****************'){
         withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){        
-            sh "docker build --no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} -t myappdocker ."
+            sh "docker build --no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} -t voodooq3/mavendocker ."
             sh "docker ps -a"
         }
     }
