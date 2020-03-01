@@ -66,9 +66,10 @@ node('slavevdjnlp'){
             //     sh "docker login -u $DockerHubUser -p $DockerHubPass"
             //  }
             // withDockerRegistry(registry: [credentialsId: 'DockerHubCred']) {
-             withDockerRegistry(credentialsId: 'DockerHubCred', toolName: 'voodooq3/mavendocker', url: 'https://index.docker.io/v1/') {
+             withDockerRegistry(credentialsId: 'DockerHubCred', url: '') {
                 // cont.push()
                 // cont.push('latest')
+                sh "docker push ${imageName}"
             }
             // sh "docker push ${imageName}"
              sh "docker rmi ${imageName}"
