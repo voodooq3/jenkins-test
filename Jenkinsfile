@@ -70,7 +70,7 @@ node('slavevdjnlp'){
                 // sh "docker push ${imageName}"
                 // push('voodooq3/mavendocker')
                 // cont.push('latest')
-            }
+            
              sh "docker push ${imageName}"
              sh "docker rmi ${imageName}"
         }
