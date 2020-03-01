@@ -59,6 +59,7 @@ node('slavevdjnlp'){
 
  }
 
-// step([$class: 'CordellWalkerRecorder'])
+/* ========================================================================= */
+buildPlugin(configurations: buildPlugin.recommendedConfigurations())
 
 
