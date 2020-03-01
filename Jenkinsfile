@@ -50,10 +50,17 @@ node('slavevdjnlp'){
         sh 'ls -l'
     }
 
-    stage('***************** Buiuld our Docker *****************'){
+    stage('***************** Buiuld container *****************'){
         withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){        
             sh "docker build --no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} -t voodooq3/mavendocker ."
             sh "docker ps -a"
+        }
+    }
+
+    stage('***************** Push container *****************'){
+        withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){        
+            sh "docker push voodooq3/mavendocker"
+            // sh "docker rmi voodooq3/mavendocker" 
         }
     }
  }
