@@ -61,24 +61,24 @@ node('slavevdjnlp'){
     }
 
 
-    stage('***************** Push container *****************'){
-        withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){   
-            withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DockerHubUser', passwordVariable: 'DockerHubPass')]) {
-                sh "docker login -u $DockerHubUser -p $DockerHubPass"
-             }
-             sh "docker push ${imageName}"
-             sh "docker rmi ${imageName}"
-        }
-    }
+    // stage('***************** Push container *****************'){
+    //     withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){   
+    //         withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DockerHubUser', passwordVariable: 'DockerHubPass')]) {
+    //             sh "docker login -u $DockerHubUser -p $DockerHubPass"
+    //          }
+    //          sh "docker push ${imageName}"
+    //          sh "docker rmi ${imageName}"
+    //     }
+    // }
 
-        // stage('***************** Push container *****************'){
-        //     withEnv(["PATH=${env.PATH}:${tool 'Docker'}/bin"]){
-        //         withDockerRegistry(credentialsId: 'DockerHubCred', toolName: 'Docker', url: 'https://index.docker.io/v1/'){
-        //             // sh "docker tag myappdocker:latest topuzliev/myappdocker:latest"
-        //             sh "docker push voodooq3/mavendocker"
-        //          }
-        //     }
-        // }
+        stage('***************** Push container *****************'){
+            withEnv(["PATH=${env.PATH}:${tool 'docker-latest'}/bin"]){
+                withDockerRegistry(credentialsId: 'DockerHubCred', toolName: 'docker-latest', url: ''){
+                    // sh "docker tag mavendocker:latest voodooq3/mavendocker:latest"
+                    sh "docker push ${imageName}"
+                 }
+            }
+        }
 
 
 
