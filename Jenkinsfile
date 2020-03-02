@@ -53,12 +53,12 @@ node('slavevdjnlp'){
         sh 'ls -l'
     }
 
-    stage('***************** Buiuld container *****************'){
-        withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){        
-            sh "docker build --no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} -t ${imageName} ."
-            sh "docker ps -a"
-        }
-    }
+    // stage('***************** Buiuld container v1 and v2 *****************'){
+    //     withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){        
+    //         sh "docker build --no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} -t ${imageName} ."
+    //         sh "docker ps -a"
+    //     }
+    // }
 
     // stage('***************** Push container v1 *****************'){
     //     withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){   
@@ -70,15 +70,30 @@ node('slavevdjnlp'){
     //     }
     // }
 
-    stage('***************** Push container v2 *****************'){
+    // stage('***************** Push container v2 *****************'){
+    //     withEnv(["PATH=${env.PATH}:${tool 'docker-latest'}/bin"]){
+    //         withDockerRegistry(credentialsId: 'DockerHubCred', toolName: 'docker-latest', url: ''){
+    //             // sh "docker tag mavendocker voodooq3/mavendocker"
+    //             sh "docker push ${imageName}"
+    //         }
+    //         sh "docker rmi ${imageName}"
+    //     }
+    // }
+
+	stage('***************** Build Dockerfile v3 *****************'){
         withEnv(["PATH=${env.PATH}:${tool 'docker-latest'}/bin"]){
-            withDockerRegistry(credentialsId: 'DockerHubCred', toolName: 'docker-latest', url: ''){
-                // sh "docker tag mavendocker voodooq3/mavendocker"
-                sh "docker push ${imageName}"
-            }
-            sh "docker rmi ${imageName}"
+            dockerImage = docker.build("voodooq3/myappdocker:latest", "--no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} .")
         }
     }
+
+    stage('***************** Push image v3 *****************') {
+        withEnv(["PATH=${env.PATH}:${tool 'docker-latest'}/bin"]){
+            withDockerRegistry(credentialsId: 'DockerHubCred', toolName: 'docker-latest', url: 'https://index.docker.io/v1/'){  
+                dockerImage.push()
+            }
+        }
+    }
+
 
  }
 
