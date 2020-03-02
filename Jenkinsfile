@@ -83,7 +83,7 @@ node('slavevdjnlp'){
 
 	stage('***************** Build Dockerfile v3 *****************'){
          // withEnv(["PATH=${env.PATH}:${tool 'docker-latest'}/bin"]){
-            dockerImage = docker.build("${appName}", "--no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} .")
+            dockerImage = docker.build("${imageName}", "--no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} .")
         }
     // }
 
