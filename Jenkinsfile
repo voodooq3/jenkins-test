@@ -3,6 +3,7 @@
 def appName = "my-app"
 def appVersion = "1.0-SNAPSHOT"
 def imageName = "voodooq3/mavendocker"
+def dockerImage = ''
 
 /* ========================================================================= */
 node('slavevd'){
@@ -82,7 +83,7 @@ node('slavevdjnlp'){
 
 	stage('***************** Build Dockerfile v3 *****************'){
         withEnv(["PATH=${env.PATH}:${tool 'docker-latest'}/bin"]){
-            dockerImage = docker.build("voodooq3/myappdocker:latest", "--no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} .")
+            dockerImage = docker.build("${appName}", "--no-cache --build-arg APP_NAME=${appName} --build-arg APP_VERSION=${appVersion} .")
         }
     }
 
