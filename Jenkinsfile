@@ -94,6 +94,11 @@ node('slavevdjnlp'){
             }
         }
     }
+
+    stage('***************** Chuck Norris *****************') {
+        step([$class: 'hudson.plugins.chucknorris.CordellWalkerRecorder'])
+    }
+
  }
 
 /* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼#
