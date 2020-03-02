@@ -60,8 +60,7 @@ node('slavevdjnlp'){
         }
     }
 
-
-    // stage('***************** Push container *****************'){
+    // stage('***************** Push container v1 *****************'){
     //     withEnv(["PATH=${env.PATH}:${tool name: 'docker-latest'}/bin"]){   
     //         withCredentials([usernamePassword(credentialsId: 'DockerHubCred', usernameVariable: 'DockerHubUser', passwordVariable: 'DockerHubPass')]) {
     //             sh "docker login -u $DockerHubUser -p $DockerHubPass"
@@ -71,17 +70,15 @@ node('slavevdjnlp'){
     //     }
     // }
 
-        stage('***************** Push container *****************'){
-            withEnv(["PATH=${env.PATH}:${tool 'docker-latest'}/bin"]){
-                withDockerRegistry(credentialsId: 'DockerHubCred', toolName: 'docker-latest', url: ''){
-                    // sh "docker tag mavendocker:latest voodooq3/mavendocker:latest"
-                    sh "docker push ${imageName}"
-                 }
+    stage('***************** Push container v2 *****************'){
+        withEnv(["PATH=${env.PATH}:${tool 'docker-latest'}/bin"]){
+            withDockerRegistry(credentialsId: 'DockerHubCred', toolName: 'docker-latest', url: ''){
+                // sh "docker tag mavendocker voodooq3/mavendocker"
+                sh "docker push ${imageName}"
             }
+            sh "docker rmi ${imageName}"
         }
-
-
-
+    }
 
  }
 
